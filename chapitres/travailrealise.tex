@@ -50,7 +50,7 @@ Aujourd'hui cette Action est toujours une classe gigogne du \textit{ColumnSelect
 Il ne restait alors plus qu'une seule tâche avant que l'implémentation du cas d'utilisation soit terminée : La conversion du graphique en un fichier SVG.
 
 \begin{quote}
-Le SVG est un format graphique vectoriel. Un fichier au format SVG contient la définitions de diverses formes. Ces défintions comportent entre autres la positions de la position de la forme, la couleur de son tracé et de son remplissage, la largeur de son tracé \ldots.
+Le SVG est un format graphique vectoriel. Un fichier au format SVG contient la définition de diverses formes. Ces défintions comportent entre autre la position de la forme, la couleur de son tracé et de son remplissage, la largeur de son tracé \ldots.
 \end{quote}
 
 \begin{quote}
@@ -58,17 +58,17 @@ Un nœud (\textit{Node}) dans \textit{JavaFX} est la classe de base de n'importe
 \end{quote}
 
 \begin{quote}
-Une scène (\textit{Scene}) est un ensemble de nœuds.
+Une scène (\textit{Scene}) est un ensemble de nœuds destinés à être affichés.
 \end{quote}
 
-J'ai repris en charge l'écriture d'un convertisseur que John avait commencé à écrire. Ce convertisseur est conçu pour pouvoir transformer n'importe quel nœud en SVG. Pour cela il parcours tous les nœuds composés récursivement\footnote{La récursivité est un concept de l'informatique qui désigne la répétition d'une action entrainée par cette même action. Ici, l'action serait ``Parcourir les enfants''. Quand je \emph{parcours les enfants}, si je trouve un enfants qui en a d'autres, je \emph{parcours ses enfants}.}, et converti les nœuds de bases en éléments SVG. Nous nous en servons sur le nœud du graphique.
+J'ai repris en charge l'écriture d'un convertisseur que John avait commencé à écrire. Ce convertisseur est conçu pour pouvoir transformer n'importe quel nœud en SVG. Pour cela il parcourt tous les nœuds récursivement\footnote{La récursivité est un concept de l'informatique qui désigne la répétition d'une action entrainée par cette même action. Ici, l'action serait ``Parcourir les enfants''. Quand je \emph{parcours les enfants}, si je trouve un enfants qui en a d'autres, je \emph{parcours ses enfants}.} jusqu'à tomber sur des noeud de base qu'il convertit en éléments SVG. Nous nous en servons sur le nœud du graphique afin de le convertir en image vectoriel.
 
-Avant que je travail dessus, voici comme le graphiques étaient rendus :
+Avant que je travail dessus, voici comment les graphiques étaient rendus :
 %----------------Image du rendu avant--------------
 
-Le travail que j'ai du effectuer pour ce convertisseur est principalement un travail d'investigation. Il fallait que je trouve où et comment JavaFX définit les options graphiques des nœuds qu'il utilise au moment de rendre les nœuds 
+Le travail que j'ai du effectuer pour ce convertisseur est principalement un travail d'investigation. Il fallait que je trouve où et comment JavaFX définit les options graphiques des nœuds afin de les répercuter sur les élément SVG leur correspondant.
 
-Pour cela, j'ai tout d'abord regardé comment le noeud du graphique était composé. J'ai extrait la hierarchie des enfants du nœud du graphique :
+Pour cela, j'ai tout d'abord regardé comment le noeud du graphique était composé. J'ai extrait la hierarchie du nœud du graphique :
 
 \begin{verbatim}
 ConcordiaChart@b721ec6[styleClass=chart]
@@ -129,28 +129,28 @@ ConcordiaChart@b721ec6[styleClass=chart]
           Text[text="0.0002200", x=0.0, y=0.0, alignment=LEF
       Rectangle[x=0.0, y=0.0, width=0.0, height=0.0, fil Empty
 \end{verbatim}
-J'ai cherché à savoir, en comparant avec les éléments du SVG déjà génèré par le code existant à quel élément graphique correspondait chacuns de ces éléments. Pour une meilleurs de ce qui suit, une capture d'écran d'un graphique a été placé après cette liste. On voit donc que le \textit{ConcordiaChart} est composé de :
+J'ai cherché à savoir à quel élément graphique correspondait chacuns de ces éléments, en comparant leur position avec les éléments d'un fichier SVG génèré par le code existant.  Pour une meilleur compréhension de ce qui suit, une capture d'écran d'un graphique a été placé après cette liste. Le \textit{ConcordiaChart} est composé de :
 \begin{itemize}
 \item Un objet \textit{Label} : le titre du graphique
-\item Un objet \textit{Chart} avec un objet \textit{XYChart} contenant :
+\item Un objet \textit{Chart}, père d'un objet \textit{XYChart} contenant :
   \begin{itemize}
-  \item Des objets \textit{Path} : Les lignes étendant les graduations des axes
+  \item Des objets \textit{Path} : Les lignes horizontales et verticale formant la grille du graphique
   \item Un objet \textit{Group} : Les objets affichés sur le graphique
     \begin{itemize}
-    \item La ligne de temps est l'objet \textit{Path} dans le second \textit{Group}
-    \item Les autres \textit{Group} contiennent un \textit{Path}, l'Ellipse, et un \textit{Circle}, le point au milieu de l'ellipse.
+    \item La ligne de temps est l'objet \textit{Path} dans le second des \textit{Group}
+    \item Les autres \textit{Group} contiennent un \textit{Path}, l'ellipse, et un \textit{Circle}, le point au milieu de l'ellipse.
     \end{itemize}
   \end{itemize}
 \item Deux objets \textit{Axis}, contenant chacun :
   \begin{itemize}
   \item Un \textit{Label} : la légende de l'axe
   \item Deux éléments \textit{Path} : Les grandes et petites marques de graduation
-  \item Des éléments \textit{Text} : Les textes des graduations
+  \item Des éléments \textit{Text} : La légende des grande graduations
   \end{itemize}
 \end{itemize}
 %Image du graphique sous JavaFX
 
-J'ai ensuite été chercher dans le moteur de rendu de \textit{JavaFX} la logique qui rend une scene à l'écran. Mon plan (diabolique s'il en est), était de voir où cette logique récupère les options graphiques des objets qu'elle doit dessiner. Si mon plan a failli, me coutant quelques jours, j'ai néanmoins appris énormément sur la façon dont \textit{JavaFX} fonctionne. 
+J'ai ensuite été chercher dans le moteur de rendu de \textit{JavaFX} la logique qui rend une scene à l'écran. Mon plan (diabolique s'il en est), était de voir où cette logique récupère les options graphiques des noeud qu'elle doit dessiner. Si mon plan a failli, me coutant quelques jours, j'ai néanmoins appris énormément sur la façon dont \textit{JavaFX} fonctionne. 
 
 Pour résumer, le code de JavaFX est separé en deux :
 \begin{enumerate}
@@ -160,12 +160,12 @@ Pour résumer, le code de JavaFX est separé en deux :
   \item Rendre des scenes (Moteur de rendu \textit{Prism}, sur lequel je me suis particulierement penché)
   \item Unifier l'interaction avec les systèmes de fenêtrage des différents OS avec lesquels \textit{JavaFX} est compatible. (Module \textit{Glassfish})
   \item Rendre différents type de médias
-  \item Rendu du HTML complet, (Moteur basé sur \textit{Webkit})
+  \item Rendre du HTML (Moteur basé sur \textit{Webkit})
   \item Marcher sur plusieurs threads
   \end{enumerate}
 \end{enumerate}
 
-Après la faillite de mon premier plan, j'ai procédé plus simplement. Je suis revenu aux objets de l'API publique, ceux que nous manipulons quand nous créons une scène et ait cherché les différentes options graphique en leur sein. J'ai reussi à trouver et à orienter correctement le nom des axes et à repositionner ceux-ci, j'ai re-aligné les graduations, repositionné et affiché des lignes et des textes dans le graph.
+Après la faillite de mon premier plan, j'ai procédé plus simplement. Je suis revenu aux noeuds dans la partie publique, ceux que nous manipulons quand nous créons une scène, et ait cherché les différentes options graphiques en leur sein. J'ai reussi à trouver et à orienter correctement le nom des axes et à repositionner ceux-ci, j'ai re-aligné les graduations, repositionné et affiché des lignes et des textes dans le graph.
 
 %
 %
