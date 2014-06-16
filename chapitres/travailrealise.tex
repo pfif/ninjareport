@@ -49,17 +49,17 @@ Aujourd'hui cette Action est toujours une classe gigogne du \textit{ColumnSelect
 \subsection{Complétion du convertisseur SVG}
 Il ne restait alors plus qu'une seule tâche avant que l'implémentation du cas d'utilisation soit terminée : La conversion du graphique en un fichier SVG.
 
-\begin{center}
+\begin{quote}
 Le SVG est un format graphique vectoriel. Un fichier au format SVG contient la définitions de diverses formes. Ces défintions comportent entre autres la positions de la position de la forme, la couleur de son tracé et de son remplissage, la largeur de son tracé \ldots.
-\end{center}
+\end{quote}
 
-\begin{center}
+\begin{quote}
 Un nœud (\textit{Node}) dans \textit{JavaFX} est la classe de base de n'importe quel élément affichable. La plupart du temps, on utilise des nœuds composés d'autres nœuds. Un simple bouton, par exemple, contient au moins un rectangle et un label\footnote{Nom d'un texte affiché à l'écran dans le jargon informatique}.
-\end{center}
+\end{quote}
 
-\begin{center}
+\begin{quote}
 Une scène (\textit{Scene}) est un ensemble de nœuds.
-\end{center}
+\end{quote}
 
 J'ai repris en charge l'écriture d'un convertisseur que John avait commencé à écrire. Ce convertisseur est conçu pour pouvoir transformer n'importe quel nœud en SVG. Pour cela il parcours tous les nœuds composés récursivement\footnote{La récursivité est un concept de l'informatique qui désigne la répétition d'une action entrainée par cette même action. Ici, l'action serait ``Parcourir les enfants''. Quand je \emph{parcours les enfants}, si je trouve un enfants qui en a d'autres, je \emph{parcours ses enfants}.}, et converti les nœuds de bases en éléments SVG. Nous nous en servons sur le nœud du graphique.
 
