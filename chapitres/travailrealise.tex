@@ -170,22 +170,21 @@ Après la faillite de mon premier plan, j'ai procédé plus simplement. Je suis 
 %
 %
 %
-\section{Réponse aux attente de la communauté GitHub}
-Le module SVG était fini. Le cas d'utilisation était implémenté. Nous étions près à montrer le fruit de notre travail aux chercheurs Australiens, ce que nous avons fait le Jeudi% verifier que c'est  bien un jeudi 
-21 mai par visioconférence. Ils étaient enchantés du prototype.
+\section{Réponse aux attentes de la communauté GitHub}
+Le module SVG était fini. Le cas d'utilisation était implémenté. Nous étions près à montrer le fruit de notre travail aux chercheurs Australiens, ce que nous avons fait le Mercredi 21 mai par visioconférence. Ils étaient enchantés du prototype.
 
 Le docteur Bowring a envoyé un lien vers le dépot GitHub du projet, et une petite mais active communauté s'est formée autour du projet. Ses membres nous envoient encore à ce jours des rapports de bug, des suggestions de fonctions.
 
 Cela a bien sur beaucoup changer la dynamique de travail. Nos journées étaient à présent partagées entre réponses à la communauté, corrections rapides de bugs et developpement de fonctions plus complexes. Nous avons appris à penser à court et long termes.
 
-Je vais à présent parler des deux dernières fonctions complexes que j'ai conçu et codé les semaines restantes.
+Je vais à présent parler des deux dernières fonctions complexes que j'ai conçu et codé pendant les semaines restantes.
 
 %
 %
 \subsection{Ré-écriture de l'interface graphique avec \textit{FXML}}
-Une fois le rush du prototype terminé, John s'est penché sur la documentation d'une fonction de \textit{JavaFX} qui avait attiré son attention un peu plus tôt. Il a lu ce qu'était \textit{FXML}, m'en a parlé et nous avons décidé qu'il serait de bon ton, pour le long terme, de ré-écrire les interfaces graphiques du programme avec. Nous nous sommes donc attelé à la tâche.
+Une fois le rush du prototype terminé, John s'est penché sur la documentation d'une fonction de \textit{JavaFX} qui avait attiré son attention un peu plus tôt. Il a lu ce qu'était \textit{FXML}, m'en a parlé et nous avons décidé qu'il serait de bon ton, pour le long terme, de ré-écrire les interfaces graphiques du programme avec. Nous nous sommes donc attelés à la tâche.
 
-Le FXML est un langage basé sur la syntaxe XML\footnote{Le XML est une syntaxe standardisée permetant de représenter n'importe quelle données composées de caracteres normaux. De nombreux langages sont basés sur XML car la logique de décodage de la syntaxe est présente dans de nombreux langages. Quand ils écrivent un décodeurs pour leur données, les developpeurs ont juste besoin de se soucier de la grammaire et du vocabulaire, pas de la syntaxe.}. Il permet de représenter simplement les interfaces graphique d'un programme. Ainsi, il y a une meilleurs séparation du code : la structures des interfaces ont leur fichiers en \textit{FXML}, et leur comportement est codé en \textit{Java}.
+Le FXML est un langage basé sur la syntaxe XML\footnote{Le XML est une syntaxe standardisée permetant de représenter n'importe quelle données textuelles. De nombreux langages sont basés sur XML car la logique de décodage de la syntaxe est présentes sur de nombreux ordinateurs. Quand ils écrivent un décodeurs pour leur données, les developpeurs ont juste besoin de se soucier de la grammaire et du vocabulaire, pas de la syntaxe.}. Il permet de représenter simplement les interfaces graphique d'un programme. Ainsi, il y a une meilleur séparation du code : les interfaces ont leur fichiers en \textit{FXML}, et leur comportements est codé en \textit{Java}.
 
 Je vais vous expliquer ce que j'ai fais pour chaque fichier avec un exemple simple.
 \begin{verbatim}
@@ -197,7 +196,7 @@ class SimplePane extends VBox{
     Button bouton = new Button("Change brother");
     bouton.setOnAction((ActionEvent e) -> {
       label.setText("Vic Vega");
-    }
+    });
 
     getChildren().add(bouton);
     getChildren().add(label);
@@ -205,27 +204,27 @@ class SimplePane extends VBox{
 }
 \end{verbatim}
 
-Nous avons ici une classe qui contient à la fois le comportement et à la fois la présentation de l'élément graphique qu'elle représente. Voyons le code de son constructeur :
+Nous avons ici le code d'un noeud qui contient à la fois son comportement et sa présentation. Voyons plus en détails le code de son constructeur :
 \begin{verbatim}
 Label label = new Label("Vincent Vega");
 Button bouton = new Button("Change brother");
 \end{verbatim}
-Ici, on crée deux éléments graphiques, un label et un bouton, c'est du code de présentation
+Ici, on crée deux éléments graphiques, un label et un bouton. Code de présentation
 
 \begin{verbatim}
 bouton.setOnAction((ActionEvent e) -> {
   label.setText("Vic Vega");
 }
 \end{verbatim}
-Un comportement est ici assigné au bouton : ``Quand tu es cliqué, le texte du label deviendra : ``Vic Vega''''
+Un comportement est ici assigné au bouton : ``Quand tu es cliqué, le texte du label deviendra : "Vic Vega"''
 
 \begin{verbatim}
 getChildren().add(bouton);
 getChildren().add(label);
 \end{verbatim}
-Ici, le label et le bouton sont ajoutés comme enfants de la classe.
+Ici, le label et le bouton sont ajoutés comme enfants de la classe. Code de présentation.\\
 
-Quand on transforme une classe dans l'optique qu'elle utilise \textit{FXML}, on enlève toutes ses partie de présentation et on les insere dans un fichier écrit avec FXML.
+Quand une classe est transformée pour qu'elle utilise \textit{FXML}, toutes ses parties de présentations sont traduites dans un fichier écrit avec \textit{FXML} :
 \begin{verbatim}
 <? xml version="1.0" encoding="UTF-8" ?>
 
@@ -236,11 +235,11 @@ Quand on transforme une classe dans l'optique qu'elle utilise \textit{FXML}, on 
 </fx:root>
 \end{verbatim}
 
-On déplace ensuite son code de comportement dans des méthodes et on lui indique de construire les objets de présentation en suivant le fichier \textit{FXML} que l'on vient d'écrire :
+Son code de comportement est ensuite déplacé dans des méthodes et son constructeur se contente de générer les objets de présentation en suivant le fichier \textit{FXML} que l'on vient d'écrire :
 \begin{verbatim}
 class SimplePane extends VBox{
 
-  @FXML Label label;
+  @FXML private Label label;
 
   public SimplePane(){
     FXMLLoader loader = new FXMLLoader(getClass().getResource("chartcustomizationpanel.fxml"),
@@ -278,9 +277,9 @@ public SimplePane(){
 }
 \end{verbatim}
 
-Ceci est le constructeur de la classe. Il ne fait que construire les objets indiqués le fichier XML. Certains de ces objets sont ensuite placés dans ces variables ...
+Ceci est le constructeur de la classe. Il ne fait que construire les objets indiquéspar le fichier XML. Certains de ces objets sont ensuite placés dans ces variables ...
 \begin{verbatim}
-@FXML Label label;
+@FXML private Label label;
 \end{verbatim}
 ... car certaines des méthodes de comportement ont besoin d'y accèder. La méthode \textit{changerBrother} accède par exemple à la variable \textit{label}.
 
@@ -291,30 +290,30 @@ Cela peut sembler beaucoup de travail pour le même résultat en retour mais cet
 Pendant que je refactorisais ces classes, je me suis aussi occupé de rendre le graphique personnalisable.
 
 \subsection{Personnalisation du graphique}
-Très tôt dans la seconde partie du projet, nous nous sommes aperçu de la necessité de personnaliser le graphique. Si \textit{Topsoil} est un outil de visualisation, c'est aussi un outil de génération de graphiques pour le partage et la publication. Dans cette optique, nous voulions donner la possibilité aux géochronologistes de créer un schema dans le même style que leur publications.
+Très tôt dans la seconde partie du projet, nous nous sommes aperçus de la necessité de personnaliser le graphique. Si \textit{Topsoil} est un outil de visualisation, c'est aussi un outil de génération de graphiques pour le partage et la publication. Dans cette optique, nous voulions donner la possibilité aux géochronologistes de créer un schema qui s'accorde au style de leur publications.
 
-Les panneaux que j'ai conçu dans cette optique et que je vais vous présenter à présent dans leur version finale ont connues plusieurs formes. Les besoins auxquels répondait leur forme première m'avaient été donné par le Docteur Bowring. D'autres fonctionnalités, comme la personnalisation des limites du schema ou encore le renommage des axes nous ont ensuites été demandé par des utilisateurs via \textit{GitHub}.
+Les panneaux que j'ai conçu dans cette optique et que je vais vous présenter dans leur version finale ont connues plusieurs formes. Les besoins auxquels répondaient leurs formes premières m'avaient été donné par le Docteur Bowring. D'autres fonctionnalités, comme la personnalisation des limites du schéma ou encore le renommage des axes nous ont ensuites été demandé par des utilisateurs via \textit{GitHub}.
 
 %INSERER UNE IMAGE POUR DU PANNEAU
 
-Il y a deux panneaux concentré en un. Celui pour configurer \emph{le style des éllipses} et le second qui permet de configurer \emph{le style du graphique}. Cette séparation est due au fait que dans le futur, il sera possible d'inserer plusieurs séries d'éllipses, et on pourra déterminer le style pour chacune d'entre elles. Il sera alors possible de multiplier aisement le premier panneau.
+Il y a deux panneaux concentrés en un. Celui pour configurer \emph{le style des éllipses} et le second qui permet de configurer \emph{le style du graphique}. Cette séparation est due au fait que dans le futur, il sera possible d'inserer plusieurs séries d'éllipses, et de déterminer le style pour chacune d'entre elles. Il sera alors possible de multiplier aisement le premier panneau.
 
 Ce premier panneau permet de modifier l'opacité et les couleurs du fond et des contours des ellipses. Cela permet de faire des choses aussi variées que ceci.
 
 %INSERER DES IMAGES D'ELLIPSE DE DIFFERENTES COULEURS
 
-Le deuxième panneau permet quand à lui de choisir le type de lignes Concordia que l'on souhaite afficher. Il permet ensuite pour chaque axes de configurer un certain nombres d'options pour les axes : 
+Le deuxième panneau permet quand à lui de choisir le type de lignes Concordia que l'on souhaite afficher. Il permet aussi pour chaque axe de configurer un certain nombre d'options : 
 \begin{itemize}
 \item Le texte de sa légende
 \item Ses limites
 \item La distances qui sépare ses grandes graduations
-\item La valeur à partir de laquelle le placement de ces grandes graduation sont calculés
-\item Le nombre de petites graduation entre les grandes graduations
+\item La valeur à partir de laquelle le placement de ces grandes graduations sont calculés
+\item Le nombre de petites graduations entre les grandes graduations
 \end{itemize}
 
-Le developpement de ces panneaux a été rendu facile par le système de \textit{Property} de JavaFX. Une \textit{Property} est la réponse de \textit{Oracle} dans \textit{JavaFX} à un problème qui faisait perdre beaucoup de temps au developpeurs. Avant quand on voulait que la valeure d'une variable soit modifiée quand une autre était changée, il fallait écrire une logique déclanchée à chaques modifications qui repercutait les changements sur la deuxième variable. Ce n'est déjà pas simple car il faut repèrer tous les endroits où un changement est effectué et lancer cette logique. Maintenant, imaginez le casse-tête que serait de lier les variables dans les deux sens. JavaFX simplifie ce problème en encapsulant la variable dans une \textit{Property}. On interagit plus directement avec la variable mais avec son conteneur. Il peut donc exectuer lui même la logique de modification. Mais il y a mieux. Dans le cas où l'on veut simplement que les valeurs de deux property soient repercutés l'ue sur l'autre, alors on peut simplement dire à \textit{JavaFX} de les lier. Tout bonnement merveilleux.
+Le developpement de ces panneaux a été rendu facile par le système de \textit{Property} de JavaFX. Une \textit{Property} est la réponse de \textit{Oracle} dans \textit{JavaFX} à un problème qui faisait perdre beaucoup de temps au developpeurs. Avant quand on voulait que la valeur d'une variable soit modifiée par le changement d'une autre, il fallait écrire une logique déclanchée à chaque modification qui étaient repercuté la valeur de la deuxième variable. Ce n'était déjà pas simple car il fallait repèrer tous les endroits où un changement est effectué et lancer cette logique. Maintenant, imaginez le casse-tête que serait de lier les variables dans les deux sens. \textit{JavaFX} simplifie ce problème en encapsulant la variable dans une \textit{Property}. Le programmeur n'interagit plus directement avec la variable mais avec son conteneur. Il peut donc exectuer lui même la logique de modification. Mais il y a mieux. Dans le cas où l'on veut simplement que les valeurs de deux \textit{Property} soient repercutés l'une sur l'autre, alors on peut simplement dire à \textit{JavaFX} de les lier.
 
-Les \textit{Property} sont utilisées partout dans JavaFX. N'importe quelle valeur, de la couleur d'une bordure à la largeur d'une fenêtre en est une. Tout ce que j'ai eu à faire est simplement lier les valeurs de mes formulaires aux propriétés auquelles elles étaient liées. 
+Les \textit{Property} sont utilisées partout dans JavaFX. N'importe quelle valeur, de la couleur d'une bordure à la largeur d'une fenêtre en est une. Tout ce que j'ai eu à faire est simplement lier les valeurs de mes formulaires aux propriétés qu'elles représentaient. 
 
 Fait qui se révèlera par la suite interessant à propos de ces propriétés cibles : dans notre programme nous savons où les trouver. Par exemple, le nom de l'axe se trouve dans la classe de l'axe. Mais notre programme est aussi une librairie integrable dans un programme plus grand. Et j'ai pensé que dans ces programmes les propriétés à paramètrées seraient a un endroit inconnu. J'avais donc conçu une interface que les panels utilisaient pour trouver les propriétés au lieu d'y acceder directement. Cette interface a été jugée trop peu utile et j'ai du la retirer.
 
