@@ -28,13 +28,13 @@ Il n'y a avait pas beaucoup de travail pour adapter le logiciel au cas d'utilisa
 \subsection{Le \textit{ColumnSelectorView}}
 Dans la version d'alors du logiciel, le tableau n'avait que cinq colonnes, une pour chaque variable dont nous avions besoin pour tracer les ellipses d'erreurs. Nous avons décidé de permettre aux utilisateurs d'insérer autant de colonnes qu'ils souhaitaient depuis leur feuille de calcul Excel. Cela demandait cependant une étape supplémentaire : lier les colonnes aux variables. C'est exactement le travail du \textit{ColumnSelectorView}. 
 
-%--------------INSERER ICI UNE CAPTURE D'ECRAN DU COLONNESELECTORVIEW. DON'T FORGET--------------
+\begin{center}
+\includegraphics[width=7cm]{./illustrations/columnselectorview.eps}
+\end{center}
 
 D'un point de vue graphique cette interface n'est pas très intéressante. La façon dont je l'ai implémenté sera par contre très intéressante pour le chapitre quatre, qui portera sur \textit{ce que j'ai appris durant ce stage}. La première mouture de cette classe ne comportait pas la logique pour de la génération du schéma. Sa conceptipon était pour moi un petit utilitaire qui ne sert qu'à choisir les champs, la génération du schéma à partir du schema devait se faire autre part. Cette classe était liéà un \textit{listener}\footnote{Un listener est une interface (au sens programatique du terme) qui réagit aux signaux d'un objet en particulier. Ici, le listener génerait le schema.} qui générait le schéma, implémenté dans la classe qui gêrait le tableau. Cela faisait sens pour moi que la génération d'un graphique avec les données d'un tableau soit ordonnée par ce même tableau. Ce n'est pas faux en soit, mais il y a mieux\ldots
 
-%--------------INSERER ICI LE CODE DE L'INTERFACE YO--------------
 
-%TODO : Quinze jours est faux, trouver le bon 
 Quinze jours plus tard, John avait drastiquement changé la classe pour me faire comprendre que ma façon de concevoir était très démodée en supprimant l'interface \textit{ColumnSelectorInterfaceListener}.
 . Laissez moi vous expliquer plus en détails.
 
@@ -62,9 +62,6 @@ Une scène (\textit{Scene}) est un ensemble de nœuds destinés à être affich�
 \end{quote}
 
 J'ai repris en charge l'écriture d'un convertisseur que John avait commencé à écrire. Ce convertisseur est conçu pour pouvoir transformer n'importe quel nœud en SVG. Pour cela il parcourt tous les nœuds récursivement\footnote{La récursivité est un concept de l'informatique qui désigne la répétition d'une action entrainée par cette même action. Ici, l'action serait ``Parcourir les enfants''. Quand je \emph{parcours les enfants}, si je trouve un enfants qui en a d'autres, je \emph{parcours ses enfants}.} jusqu'à tomber sur des noeud de base qu'il convertit en éléments SVG. Nous nous en servons sur le nœud du graphique afin de le convertir en image vectoriel.
-
-Avant que je travail dessus, voici comment les graphiques étaient rendus :
-%----------------Image du rendu avant--------------
 
 Le travail que j'ai du effectuer pour ce convertisseur est principalement un travail d'investigation. Il fallait que je trouve où et comment JavaFX définit les options graphiques des nœuds afin de les répercuter sur les élément SVG leur correspondant.
 
@@ -148,7 +145,11 @@ J'ai cherché à savoir à quel élément graphique correspondait chacuns de ces
   \item Des éléments \textit{Text} : La légende des grande graduations
   \end{itemize}
 \end{itemize}
-%Image du graphique sous JavaFX
+
+\begin{center}
+\includegraphics[width=10cm]{./illustrations/graphique.eps}
+\end{center}
+
 
 J'ai ensuite été chercher dans le moteur de rendu de \textit{JavaFX} la logique qui rend une scene à l'écran. Mon plan (diabolique s'il en est), était de voir où cette logique récupère les options graphiques des noeud qu'elle doit dessiner. Si mon plan a failli, me coutant quelques jours, j'ai néanmoins appris énormément sur la façon dont \textit{JavaFX} fonctionne. 
 
@@ -298,9 +299,7 @@ Les panneaux que j'ai conçu dans cette optique et que je vais vous présenter d
 
 Il y a deux panneaux concentrés en un. Celui pour configurer \emph{le style des éllipses} et le second qui permet de configurer \emph{le style du graphique}. Cette séparation est due au fait que dans le futur, il sera possible d'inserer plusieurs séries d'éllipses, et de déterminer le style pour chacune d'entre elles. Il sera alors possible de multiplier aisement le premier panneau.
 
-Ce premier panneau permet de modifier l'opacité et les couleurs du fond et des contours des ellipses. Cela permet de faire des choses aussi variées que ceci.
-
-%INSERER DES IMAGES D'ELLIPSE DE DIFFERENTES COULEURS
+Ce premier panneau permet de modifier l'opacité et les couleurs du fond et des contours des ellipses.
 
 Le deuxième panneau permet quand à lui de choisir le type de lignes Concordia que l'on souhaite afficher. Il permet aussi pour chaque axe de configurer un certain nombre d'options : 
 \begin{itemize}
@@ -316,5 +315,3 @@ Le developpement de ces panneaux a été rendu facile par le système de \textit
 Les \textit{Property} sont utilisées partout dans JavaFX. N'importe quelle valeur, de la couleur d'une bordure à la largeur d'une fenêtre en est une. Tout ce que j'ai eu à faire est simplement lier les valeurs de mes formulaires aux propriétés qu'elles représentaient. 
 
 Fait qui se révèlera par la suite interessant à propos de ces propriétés cibles : dans notre programme nous savons où les trouver. Par exemple, le nom de l'axe se trouve dans la classe de l'axe. Mais notre programme est aussi une librairie integrable dans un programme plus grand. Et j'ai pensé que dans ces programmes les propriétés à paramètrées seraient a un endroit inconnu. J'avais donc conçu une interface que les panels utilisaient pour trouver les propriétés au lieu d'y acceder directement. Cette interface a été jugée trop peu utile et j'ai du la retirer.
-
-%%PARLER DU RÉSUMÉ DU LIVRE
