@@ -62,3 +62,61 @@ The very interesting construction of the diagram is here made in two times. The 
 
 There are two things to say about that. The plot of a serie of data can not be made of several plot of the different point that it is made of : there is also information about the link between all those plot. For exemple, here, if we ploted all the plot one at the time, the location would be drawn, but not the path between two of those location.
 Let's now take a look at the bottom of the chart, where the temperature of each steps is represented. The x-axis is simply representing the temperatures. The y-axis on the other hand is "the step", and is given by the first and main plot of the diagram. This is a very interesting use case.
+
+\section{Several principles that make a good plot}
+Edward Tufte give in his book several principles that make a good chart. For the moment, I do not certify that all of those rules will be of some help for our work. I still think the team should be aware of their existence.
+
+There are two sort of rules :
+\begin{enum}
+\item Those which avoid misleading diagram  
+\item Those which allow a better presentation of the plot
+\end{enum}
+
+\subsection{Keeping graphical integrity} 
+Tufte put together five rules that must be followed when building a graph to ensure its integrity.
+
+\begin{quote}
+The representation of numbers, as physically measured on the surface of the graphic itself, should be directly proportional to the numerical quantities represented.
+\end{quote}
+This is not always the case and lead to misinformation of the uncareful viewer. Tufte invented a unit representing how much the diagram is lying : the Lie Factor.
+
+$Lie Factor = \frac{size of effect shown in graphic}{size of effect in data}$
+
+A quick exemple of the Lie Factor :
+
+%Image of the Fuel Economy Standards for auto
+
+\begin{enum}
+\item The increase between 18 and 27 is \emph{53\%}
+\item The increase between 0.6 inch and 5.3 inch, the size of the two side of the road is \emph{783\%}
+\end{enum}
+
+The lie factor is  : $\frac{783}{53} = 14.8$ 
+
+\begin{quote}
+Clear detailed and thorough labeling should be used to defeat distortion and ambiguity. Write out explanations of the data on the graphic itself
+\end{quote}
+
+As said before, the library should provide a way to add text, possibly linked to the data, or the serie of data.
+\begin{quote}
+Show data variation, not design variation.
+\end{quote}
+The unit on the axis should never change. On some of the book's graphic, on the x-axis, the section between represent a year.
+Then, for the same lengh, it suddenly switch to one month. It is not may obvious and the unfocused viewer suddenly see a drop in the data. 
+Also the aspect ratio of the graphic matters. A graphic taller than wide can depict a normal situation as skyrocketing.
+
+\begin{quote}
+In time-series displays of money, deflated and standardized units of monetary measurement are nearly always better than nominal unit
+\end{quote}
+
+\begin{quote}
+The number of information-carrying (variable) dimensions depicted should not exceed the number of dimensions in the data.
+\end{quote}
+There are considerable ambiguities in how peoples percieve a two-dimensional surface, and making the area proportional to the data is a perilous task. For a single data, a single dimension form, like a line, is better.
+
+\begin{quote}
+Graphic must not quote data out of their context
+\end{quote}
+%Image of the nazi thingy
+This image shows us that the number of time by seconds the words "nazi" and "nazies" were tweeted during an USA vs. Germany match skyrocketed from 5 to 25 when Germany scored.
+But none of the data shows us how many time the word is tweeted during the rest of the year. This is a problem because it could be a lot more than that or a lot less, and we have no ideas.
