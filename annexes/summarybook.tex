@@ -18,6 +18,7 @@ This document will be structured in three parts :
 \section{A quick summary of this book}
 This book is a manifesto. It assert that chart are powerful tools of communication, explain why and how to make great graphics.
 Along the book, Tufte find regrettable that plot are underused in many kinds of publication, like textbooks, papers or journals. He also list a few reason of this underusage.
+%What is part I/What is part II
 
 \section{A list of graphic}
 It has been decided that our library should support a lot of type of graphics. To expend the range of known type by the team and gather documentation in one place, a number of chart along with the features needed in order to support them will be given here.
@@ -45,5 +46,19 @@ The begining and the end must also fit closely the earth. These are the two reas
 %NY City Weather
 Several informations can be gained from that plot.
 
-First, notice the indications pointing on the main curve (like "LINE INDICATE THE NORMAL LOW"). Tufte love their usefulness. We should find a way to make them point to either a point of a serie of point, or to nothing.
-Secondly, notice that the actu 
+First, notice the indications pointing on the main curve (like "LINE INDICATE THE NORMAL LOW"). Tufte love their usefulness. We should find a way to make them point to either a point of a serie of point, or to nothing. Also, allow the automation to print the data they are pointed to
+Secondly, notice that the temperature axis is reproduced on the two sides. Printing the same axis mutliple time on the same plot should be a possibility. 
+Thirdly, there is one subgraph drawn for each month representing the difference between the actual precipitation and the normal.
+Last, but not least : the several pieces of data are linked to the same x-axis and to different y-axis.
+
+%Playfair : "Sharing at one wiew the Price of Quarter of Wheat ...
+Concernine this diagram, I cannot think of more than one axis of reflection for now. There are two sets of data that have there own space, making the plot more readable. Maybe we could arrange plot of data to be aware of their sibblings, or make the PlotArea smarter when it is outlining two set of data.
+
+%http://worldtracker.org/media/library/Science/Science%20Magazine/science%20magazine%201981-1982/Science%201981-1982/root/data/Science_1981-1982/pdf/1982_v216_n4550/p4550_1086.pdf
+
+\subsection{Time-Space chart}
+%Teh Napoleon Chart
+The very interesting construction of the diagram is here made in two times. The following data is given to draw the path of Napoleon's army in russia, for each step : the two numbers of the location of the step, the number of soldier (transformed in the width) that was at that moment in the army, and the date which give the order\footnote{There is also the travel direction of the army that give the color, but it is not relevant in this context}.
+
+There are two things to say about that. The plot of a serie of data can not be made of several plot of the different point that it is made of : there is also information about the link between all those plot. For exemple, here, if we ploted all the plot one at the time, the location would be drawn, but not the path between two of those location.
+Let's now take a look at the bottom of the chart, where the temperature of each steps is represented. The x-axis is simply representing the temperatures. The y-axis on the other hand is "the step", and is given by the first and main plot of the diagram. This is a very interesting use case.
