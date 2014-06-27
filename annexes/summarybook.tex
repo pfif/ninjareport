@@ -1,0 +1,49 @@
+\chapter{Knowledge to be gained from \textit{The Visual Display of Quantitative Information} facing \textit{CIRDLES' Tufte}}
+
+\section{Introduction}
+Topsoil is the latest projet from the CIRDLES' Lab. It allow geochronologists to plot various graphs needed for the analysis of aliquots. This software is based on the library JavaFX that gives Java the ability to display user interface.
+The first and current version of Topsoil is using the ploting abilities of JavaFX. But as we copied and rewrite part of it to make it fit our needs, we quickly realize that it had too much flaws to be a long term solution. And being a long term solution is one of this project objective.
+After long and laborious search, John did not found a good library that could plot graphics for us. The solutions were either too specific, not well-designed enough or not compatible with JavaFX. From that moment on, it become clear that we needed to create our own graphic library. 
+
+Designing, coding and maintaining this kind of library is a lot of work, worth the result. But it is preferable that a team document itself before starting a project of this scale. 
+In that regard, a book can bring a lot of information : \textit{The Visual Display of Quantitive Information} by Edward Tufte. This document describe several information to this book and how they might be useful to the project. %GOD YOU HAVE TO MODIFY THAT
+
+This document will be structured in three parts : 
+\begin{enum}
+\item First of all, I will give a very brief summary of the book, allowing the reader to feel the tone of the book.
+\item Then I will give a number of chart that the library should be able to produce.
+\item Finally, I will give a number of Tufte's rules for the diagram and some ideas on how the library should enforce or encourage to enforce them. 
+\end{enum}
+%Please note very wide not to follow right away
+\section{A quick summary of this book}
+This book is a manifesto. It assert that chart are powerful tools of communication, explain why and how to make great graphics.
+Along the book, Tufte find regrettable that plot are underused in many kinds of publication, like textbooks, papers or journals. He also list a few reason of this underusage.
+
+\section{A list of graphic}
+It has been decided that our library should support a lot of type of graphics. To expend the range of known type by the team and gather documentation in one place, a number of chart along with the features needed in order to support them will be given here.
+
+\subsection{Data Map chart}
+Laying out data on a map can with no doubt, can carry an enormous volume of data and have a lot of reading levels.
+
+%Complexe line representing the sea.
+To implement this map, the \textit{Tufte} library's graph background would have to be be filled up with a map\footnote{It could be useful to look into interoperable map format, or even map libraries}, integrating name of landmarks. Symbols of all kind could be added, from a single point on a city to complex lines representing the sea like here :
+
+%Cancer map
+An other important feature to consider for the library to implement this map is the binding of data to zone on the map in the background.
+
+%French export
+To draw this map, several layers of the map have to be known by the rendered line. The informations passed to draw theses are :
+\begin{enum}
+\item Position of the begining
+\item Position of the end
+\item A quantity
+\end{enum}
+The quantity is then turned into the width of line, which will be drawn from its begining to its end, without crossing earth.
+The begining and the end must also fit closely the earth. These are the two reasons why the rendered elements should be awared of the map and its shape.
+
+\subsection{Time-Space chart}
+%NY City Weather
+Several informations can be gained from that plot.
+
+First, notice the indications pointing on the main curve (like "LINE INDICATE THE NORMAL LOW"). Tufte love their usefulness. We should find a way to make them point to either a point of a serie of point, or to nothing.
+Secondly, notice that the actu 
