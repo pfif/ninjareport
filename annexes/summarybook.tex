@@ -120,3 +120,73 @@ Graphic must not quote data out of their context
 %Image of the nazi thingy
 This image shows us that the number of time by seconds the words "nazi" and "nazies" were tweeted during an USA vs. Germany match skyrocketed from 5 to 25 when Germany scored.
 But none of the data shows us how many time the word is tweeted during the rest of the year. This is a problem because it could be a lot more than that or a lot less, and we have no ideas.
+
+\subsection{Building clearer graphic}
+\begin{quote}
+Above all else, show the data
+\end{quote}
+
+Tufte believe that most of the ink/pixels of the chart should be used to draw the data. He even invented another ratio to measure how much the graphic was clogued up by unuseful drawings.
+
+$Data-ink ratio = \frac{data-ink}{total ink used to print the graphic}$
+
+The data ink comprise nothing exept the object representing the data. This means that the objects allowing the representation to make sense (axis, texts) are not included. 
+This is why the data-ink ratio must most of the time never be one, but should stay near one.
+A grid too precise, axis overloaded, unrelated drawing : all of those block a graphic, preventing it to deliver correctly the data.
+
+%Image d'un histogramme
+Representing the data multiple time is also orverloading a chart. On this bar, the number "35.9" is represented in 6 ways :
+\begin{enum}
+\item Height of the left line
+\item Height of the right line
+\item Height of the shading
+\item Height of the top line
+\item Position of the text
+\item Text itself
+\end{enum}
+This is ink lost and chart complexified for nothing. Remember, it's like in a movie : You don't need three shots of someone saying one sentence if one is as efficient. And you don't need to move around her unless you have a good reason 
+ Damn you, Michael Bay.
+ A chart creator should always try to represente one information with less ink as possible.
+ One hint, in order to achieve this : Symmetry represent always represent the data twice.
+
+%Image : Moire
+Above, you will find several type of moiré effects. Printing them on a chart make it less clear and less attractive. Considered when computer ploting was created as a modern effect, it has plague ever since chart in the industry. The library shall not encourage this trend.
+
+The grid is also an element that can obfuscate a chart : It compete with the data and is not often necessary.
+ It can be useful only when the graph serva as a look-up table, but even then, it shall be lighter than the data and remain in the background. table, but even then, it shall be lighter than the data and remain in the background.
+ In those cases, the white grid is a good idea. The white grid is printed by erasing part of the data where a grid should cross it, and not drawing anything else aside of that. Here's an exemple :
+%The white grid shall go here
+
+The axis are also almost never used at their best. By erasing or moving part of it, we can show more data : 
+
+%Image : Chart p.132
+
+On this chart, 10 number have been added to the set of data : 
+\begin{enum}
+\item the minimum and maximumare shown by begin and ending the axis at their value
+\item the shifted part of the axis represent three quartil : lower, upper
+\item the erased portion in the shifted part show the median quartil
+\end{enum}
+Since these value are showm on the two axis, we have $5*2$ value that have been added.
+
+An axis can also show the marginal distribution of each variables :
+%Image : image p.133
+
+Ticking is also subjected to improvment : In small set of data, printing actual numbers from the set instead of arbitrary rounded up numbers can also make the axis more efficient.
+
+Effciency in representing data can be found by representing multiple number of information with a single point. A point on a map represent the location, the name of a city and can also represent another variable.
+ Push to its limit, this idea can be very interesting : What if the data was represented by its number ? In short to medium sized data set, this idea can sometime be interesting.
+ This chart shows, with the economy of one axis, three infotmations : 
+\begin{enum}
+\item the number of fivision for each month, June 1917 to October 1918
+\item what particular division were in France in each month
+\item the duration of each division's presence in France
+\end{enum}
+%Image p.141
+The name given to a data serie can also be interesting if it is chosen wisely.
+ If there are a hundread series in a plot, that they are named according to this model : ``61c'' stands for \emph{The third study made in 1961}, and that this name is shown on the plot, it can add a lot of information for the focused viewer.
+
+To judge if a graph is intuitive, the following question should be asked : \emph{Does the viewer see the data or interprate the graphic ? Is my diagram telling a story when glanced at it ? When seen up close, are my data point all making sense ?}
+ Color is not often an intuitive medium, for it is not immediately translatable by the viewer in data without jumping to the legend and see what it means. Shade of greys are more efficient. A graphic made of several small graphics can be a very efficient way of showing a lot of data, and compare several states of an object.
+
+Finally, Line weight and lettering should be proportional to the importance of what they represent. Not all of the element should thick, nor should all they be thin. A balance shall be found. A rectangle graphic is also always better.
