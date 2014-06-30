@@ -1,20 +1,29 @@
-\documentclass{report}
+\documentclass[oneside]{book}
+\pagestyle{empty}
+
 \usepackage[utf8]{inputenc}
 \usepackage[francais]{babel}
 \usepackage{graphicx}
 
 \begin{document}
-
+\frontmatter
 \title{Rapport de stage}
 \author{Florent Pastor}
 \date{16 juin 2014}
 \maketitle
 \tableofcontents
 \input{./introduction.tex}
+
+\mainmatter
 \input{./chapitres/presentationentreprise.tex}
 \input{./chapitres/sujetstage.tex}
 \input{./chapitres/travailrealise.tex}
 \input{./chapitres/analyse.tex}
+
+\appendix
+\input{./annexes/summarybook.tex}
+
+\backmatter
 \input{./conclusion.tex}
 
 \end{document}
