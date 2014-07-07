@@ -40,12 +40,21 @@ It has been decided that our library should support a lot of type of graphics. T
 Laying out data on a map can with no doubt, can carry an enormous volume of data and have a lot of reading levels.
 
 %Complexe line representing the sea.
+\centerline{
+\includegraphics[width=19cm]{./illustrations/annexes/carte_courants.eps}
+}
 To implement this map, the \textit{Tufte} library's graph background would have to be be filled up with a map\footnote{It could be useful to look into interoperable map format, or even map libraries}, integrating name of landmarks. Symbols of all kind could be added, from a single point on a city to complex lines representing the sea like here :
 
 %Cancer map
+\centerline{
+\includegraphics[width=19cm]{./illustrations/annexes/carte_cancer.eps}
+}
 An other important feature to consider for the library to implement this map is the binding of data to zone on the map in the background.
 
 %French export
+\centerline{
+\includegraphics[width=19cm]{./illustrations/annexes/carte_exports.eps}
+}
 To draw this map, several layers of the map have to be known by the rendered line. The informations passed to draw theses are :
 \begin{itemize}
 \item Position of the begining
@@ -57,6 +66,9 @@ The begining and the end must also fit closely the earth. These are the two reas
 
 \subsection{Time-Space chart}
 %NY City Weather
+\centerline{
+\includegraphics[width=19cm]{./illustrations/annexes/temps_nymeteo.eps}
+}
 Several informations can be gained from that plot.
 
 First, notice the indications pointing on the main curve (like "LINE INDICATE THE NORMAL LOW"). Tufte love their usefulness. We should find a way to make them point to either a point of a serie of point, or to nothing. Also, allow the automation to print the data they are pointed to
@@ -65,12 +77,18 @@ Thirdly, there is one subgraph drawn for each month representing the difference 
 Last, but not least : the several pieces of data are linked to the same x-axis and to different y-axis.
 
 %Playfair : "Sharing at one wiew the Price of Quarter of Wheat ...
+\centerline{
+\includegraphics[width=19cm]{./illustrations/annexes/temps_ble.eps}
+}
 Concernine this diagram, I cannot think of more than one axis of reflection for now. There are two sets of data that have there own space, making the plot more readable. Maybe we could arrange plot of data to be aware of their sibblings, or make the PlotArea smarter when it is outlining two set of data.
 
 %http://worldtracker.org/media/library/Science/Science%20Magazine/science%20magazine%201981-1982/Science%201981-1982/root/data/Science_1981-1982/pdf/1982_v216_n4550/p4550_1086.pdf
 
 \subsection{Time-Space chart}
 %Teh Napoleon Chart
+\centerline{
+\includegraphics[width=19cm]{./illustrations/annexes/tempscarte_napoleon.eps}
+}
 The very interesting construction of the diagram is here made in two times. The following data is given to draw the path of Napoleon's army in russia, for each step : the two numbers of the location of the step, the number of soldier (transformed in the width) that was at that moment in the army, and the date which give the order\footnote{There is also the travel direction of the army that give the color, but it is not relevant in this context}.
 
 There are two things to say about that. The plot of a serie of data can not be made of several plot of the different point that it is made of : there is also information about the link between all those plot. For exemple, here, if we ploted all the plot one at the time, the location would be drawn, but not the path between two of those location.
@@ -98,6 +116,9 @@ $Lie Factor = \frac{size of effect shown in graphic}{size of effect in data}$
 A quick exemple of the Lie Factor :
 
 %Image of the Fuel Economy Standards for auto
+\centerline{
+\includegraphics[width=19cm]{./illustrations/annexes/temps_fuel.eps}
+}
 
 \begin{itemize}
 \item The increase between 18 and 27 is \emph{53\%}
@@ -130,7 +151,11 @@ There are considerable ambiguities in how peoples percieve a two-dimensional sur
 \begin{quote}
 Graphic must not quote data out of their context
 \end{quote}
+
 %Image of the nazi thingy
+\centerline{
+\includegraphics[width=19cm]{./illustrations/annexes/temps_nazi.eps}
+}
 This image shows us that the number of time by seconds the words "nazi" and "nazies" were tweeted during an USA vs. Germany match skyrocketed from 5 to 25 when Germany scored.
 But none of the data shows us how many time the word is tweeted during the rest of the year. This is a problem because it could be a lot more than that or a lot less, and we have no ideas.
 
@@ -148,6 +173,10 @@ This is why the data-ink ratio must most of the time never be one, but should st
 A grid too precise, axis overloaded, unrelated drawing : all of those block a graphic, preventing it to deliver correctly the data.
 
 %Image d'un histogramme
+\centerline{
+\includegraphics[width=19cm]{./illustrations/annexes/histogramme.eps}
+}
+
 Representing the data multiple time is also orverloading a chart. On this bar, the number "35.9" is represented in 6 ways :
 \begin{itemize}
 \item Height of the left line
@@ -163,16 +192,25 @@ This is ink lost and chart complexified for nothing. Remember, it's like in a mo
  One hint, in order to achieve this : Symmetry represent always represent the data twice.
 
 %Image : Moire
+\centerline{
+\includegraphics[width=19cm]{./illustrations/annexes/moires.eps}
+}
 Above, you will find several type of moiré effects. Printing them on a chart make it less clear and less attractive. Considered when computer ploting was created as a modern effect, it has plague ever since chart in the industry. The library shall not encourage this trend.
 
 The grid is also an element that can obfuscate a chart : It compete with the data and is not often necessary.
  It can be useful only when the graph serva as a look-up table, but even then, it shall be lighter than the data and remain in the background. table, but even then, it shall be lighter than the data and remain in the background.
  In those cases, the white grid is a good idea. The white grid is printed by erasing part of the data where a grid should cross it, and not drawing anything else aside of that. Here's an exemple :
 %The white grid shall go here
+\centerline{
+\includegraphics[width=19cm]{./illustrations/annexes/grilleblanche.eps}
+}
 
 The axis are also almost never used at their best. By erasing or moving part of it, we can show more data : 
 
 %Image : Chart p.132
+\centerline{
+\includegraphics[width=19cm]{./illustrations/annexes/axesmodernes.eps}
+}
 
 On this chart, 10 number have been added to the set of data : 
 \begin{itemize}
@@ -184,6 +222,9 @@ Since these value are showm on the two axis, we have $5*2$ value that have been 
 
 An axis can also show the marginal distribution of each variables :
 %Image : image p.133
+\centerline{
+\includegraphics[width=19cm]{./illustrations/annexes/axesdistributions.eps}
+}
 
 Ticking is also subjected to improvment : In small set of data, printing actual numbers from the set instead of arbitrary rounded up numbers can also make the axis more efficient.
 
@@ -196,6 +237,9 @@ Effciency in representing data can be found by representing multiple number of i
 \item the duration of each division's presence in France
 \end{itemize}
 %Image p.141
+\centerline{
+\includegraphics[width=19cm]{./illustrations/annexes/relationel_tungsten.eps}
+}
 The name given to a data serie can also be interesting if it is chosen wisely.
  If there are a hundread series in a plot, that they are named according to this model : ``61c'' stands for \emph{The third study made in 1961}, and that this name is shown on the plot, it can add a lot of information for the focused viewer.
 
